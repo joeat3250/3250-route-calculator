@@ -404,6 +404,33 @@ tbody td{padding:11px 14px;color:var(--text)}
     <div class="factors" id="active-factors"></div>
     <hr class="divider">
     <div id="rec-box"></div>
+    <!-- Fuel Stops -->
+    <div id="fuel-stops-section" style="border-top:1px solid var(--border);padding-top:16px;margin-top:16px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--dim);text-transform:uppercase;margin-bottom:12px">⛽ Find Fuel Stops Along Route</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+
+        <a id="fuel-gmaps" href="#" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-radius:8px;border:1px solid #4285f455;background:var(--surface2);cursor:pointer;text-decoration:none;transition:all 0.18s ease" onmouseover="this.style.borderColor='#4285f4aa';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#4285f455';this.style.transform='translateY(0)'">
+          <span style="font-size:20px">🗺️</span>
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#4285f4">Google Maps</span>
+          <span style="font-size:9px;color:var(--dim);text-align:center">Route with fuel stops</span>
+        </a>
+
+        <a href="https://mudflapinc.com" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-radius:8px;border:1px solid #ff6b2255;background:var(--surface2);cursor:pointer;text-decoration:none;transition:all 0.18s ease" onmouseover="this.style.borderColor='#ff6b22aa';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#ff6b2255';this.style.transform='translateY(0)'">
+          <span style="font-size:20px">💧</span>
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#ff6b22">Mudflap</span>
+          <span style="font-size:9px;color:var(--dim);text-align:center">Discounted diesel stops</span>
+        </a>
+
+        <a href="https://truckerpath.com" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-radius:8px;border:1px solid #00c46a55;background:var(--surface2);cursor:pointer;text-decoration:none;transition:all 0.18s ease" onmouseover="this.style.borderColor='#00c46aaa';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#00c46a55';this.style.transform='translateY(0)'">
+          <span style="font-size:20px">🛣️</span>
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#00c46a">Trucker Path</span>
+          <span style="font-size:9px;color:var(--dim);text-align:center">Fuel prices & truck stops</span>
+        </a>
+
+      </div>
+      <div style="font-size:10px;color:var(--dim);text-align:center;margin-top:10px">Google Maps pre-fills your route · Mudflap & Trucker Path open their fuel planners</div>
+    </div>
+
     <div style="margin-top:16px"><button class="btn btn-success btn-sm" id="btn-save-route">Save to Dashboard</button></div>
   </div>
 </div>
@@ -919,6 +946,11 @@ tbody td{padding:11px 14px;color:var(--text)}
     el('rec-box').innerHTML = '<div class="alert '+rc2+'">'+ri+' <strong>Recommendation:</strong> '+rm+'</div>';
     el('route-result').classList.add('show');
     el('route-result').scrollIntoView({behavior:'smooth',block:'nearest'});
+    // Update fuel stops Google Maps link with actual route
+    var gmapsEl = el('fuel-gmaps');
+    if (gmapsEl && origin && dest) {
+      gmapsEl.href = 'https://www.google.com/maps/dir/' + encodeURIComponent(origin) + '/' + encodeURIComponent(dest) + '/';
+    }
 
 
     } // end runAnalysis
